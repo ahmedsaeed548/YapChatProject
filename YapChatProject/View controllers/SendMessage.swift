@@ -12,10 +12,9 @@ import CoreData
 
 struct Message {
     var id: Int
-    var message: String
     var name: String
+    var message: String
 }
-
 
 class SendMessageViewController: UIViewController, UITextFieldDelegate {
     
@@ -29,63 +28,61 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
     var user: Model?
     var userMessage: UserMessage?
     var detailOfVisitor: VisitorMessageDetails?
+    var visitorDetails: [WebChatDetialVisitor]?
     var message: [String] = []
-    
+    var id: Int?
+    var name: String?
+    var messages: String?
+    var messageTxt: String = ""
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         messageTxtField.delegate = self
         view.backgroundColor = .yellow
-        hubConnection = HubConnection(withUrl: "https://tlp.360scrm.com")
-        chat = self.hubConnection.createHubProxy(hubName: "NotificationHub")
+        hubConnection = HubConnection(withUrl: "https://tlp.360scrm.com/")
+        chat = self.hubConnection.createHubProxy(hubName: "notificationHub")
         
-        _ = chat?.on(eventName:"￼￼broadcastMessage") { (args) in
-             if let name = args[0] as? String, let id = args[1] as? Int, let message = args[2] as? String {
-                        print("Name: \(name), VisitorID: \(id), message: \(message)")
-                    }
-         }
-        chat.invoke(method: "JoinGroup", withArgs: ["Group1"]) { result, error in
-            if let error = error {
-                print(error)
-            } else {
-                print("invoked")
-            }
+        openHubConnection()
+        
+        
+        hubConnection.received = { data in
+            print(data)
         }
         
-        detailsOfVisitorChat(visitorId: self.user?.id ?? 0, sessionId: self.user?.visitorSession.id ?? 1)
-        
         sendBtn.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+       
         receiveBtn.addTarget(self, action: #selector(receiveMessage), for: .touchUpInside)
     }
     
     func openHubConnection() {
-
+        
         hubConnection.started = {
             self.typingLbl.text = "Connected"
         }
-
+        
         hubConnection.reconnecting = {
-            self.typingLbl.text = "Connected"
+            self.typingLbl.text = "Reconnecting"
             print("Reconnecting...")
         }
-
+        
         hubConnection.reconnected = {
             self.typingLbl.text = "Reconnected, connection ID: \(self.hubConnection.connectionId ?? " ")"
             print("Reconnected.")
         }
-
+        
         hubConnection.closed = {
             self.typingLbl.text = "Hub Disconnected"
             print("Hub Disconnected")
         }
-
+        
         hubConnection.connectionSlow = {
             self.typingLbl.text = "Connection Slow"
             print("Connection slow...") }
-
+        
         hubConnection.error = { error in
             print(error)
         }
-
+        
         hubConnection.start()
     }
     
@@ -124,33 +121,37 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func sendMessage() {
-        if let messageTxt = messageTxtField.text {
-
-            print("User Id is \(self.user?.id ?? 0) and name is \(user?.name ?? " ")")
-            chat.invoke(method: "brdcastMessage", withArgs: [self.user?.id, self.user?.name, messageTxt], completionHandler: { result, error in
-                print("adfas")
-            })
-            self.saveVisitorChat(visitorSessionID: user?.visitorSession.id ?? 0, visitorId: user?.id ?? 1, message: messageTxt)
-            
-            message.append(messageTxt)
-            print("Messages \(message)")
+        self.messageTxt = messageTxtField.text!
+        
+        print("User Id is \(self.user?.id ?? 0) and name is \(user?.name ?? " ")")
+        self.saveVisitorChat(visitorSessionID: user?.visitorSession.id ?? 0, visitorId: user?.id ?? 1, message: messageTxt)
+        self.detailsOfVisitorChat(visitorId: self.user?.id ?? 0, sessionId: self.user?.visitorSession.id ?? 1)
+        message.append(messageTxt)
+        
+        chat.invoke(method: "visitorReply", withArgs: [self.user!.name, self.user!.id, messageTxt]) { result, error in
+            if let error = error {
+                print(error)
+            } else {
+                print("invoked Successfully!")
+            }
         }
+        
     }
     
     @objc func receiveMessage() {
-        print("is tapped.")
-        _ = chat?.on(eventName:"￼￼broadcastMessage") { (args) in
-             if let name = args[0] as? String, let id = args[1] as? Int, let message = args[2] as? String {
-                        print("Name: \(name), VisitorID: \(id), message: \(message)")
-                    }
-         }
+        messageTxt = "I am here, Testing invoking method!"
+      
+        chat.invoke(method: "broadcastMessage", withArgs: [self.user!.name, self.user!.id, self.messageTxt]) { result, error in
+            if let error = error {
+                print("error \(error.localizedDescription)")
+            } else {
+                print("broadcastMessage invoked succesfully! \(result)")
+            }
+        }
+    
     }
-}
-
-extension SendMessageViewController {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-       // chat?.invoke(method: "visitorTyping", withArgs: [self.user?.id ?? 0,  self.user?.name ?? "Ahmed"])
-        
+    
+    func visitorTyping() {
         chat.invoke(method: "visitorTyping", withArgs: [self.user?.id ?? 0,  self.user?.name ?? "Ahmed"]) { response, error  in
             if let error = error {
                 print(error)
@@ -158,6 +159,12 @@ extension SendMessageViewController {
                 print("\(self.user!.name) is typing..")
             }
         }
+    }
+}
+
+extension SendMessageViewController {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        self.visitorTyping()
         return true
     }
 }

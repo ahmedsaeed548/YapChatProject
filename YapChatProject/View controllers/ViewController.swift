@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var emailTxt: String = ""
     var phoneNumber: String = ""
     var user : Model?
+
     
     @IBOutlet weak var saveBtn: UIButton!
     override func viewDidLoad() {
@@ -42,6 +43,7 @@ class ViewController: UIViewController {
                     print(failure)
             }
         }
+       
     }
         
         func navigateToSendMessage() {
@@ -54,8 +56,8 @@ class ViewController: UIViewController {
         
         @objc func isTapped() {
             
-            self.nameTxt = "ahmed"
-            self.emailTxt = "khassn@gmail.com"
+            self.nameTxt = "ios"
+            self.emailTxt = "iostest@gmail.com"
             self.phoneNumber = "03091784743"
             
             self.saveVisitor(name: self.nameTxt, email: self.emailTxt, phoneNumber: self.phoneNumber)

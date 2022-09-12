@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4C11700275A750D372D53811 /* Pods_YapChatProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */; };
+		E0AD305B28C142EB0046CA89 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305A28C142EB0046CA89 /* Chat.swift */; };
+		E0AD305D28C1DB2E0046CA89 /* SwiftRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */; };
+		E0D6181728C88702001536E7 /* SwiftRExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6181628C88702001536E7 /* SwiftRExample.swift */; };
 		E0EC491728BF361D001361CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491628BF361D001361CF /* AppDelegate.swift */; };
 		E0EC491928BF361D001361CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491828BF361D001361CF /* SceneDelegate.swift */; };
 		E0EC491B28BF361D001361CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491A28BF361D001361CF /* ViewController.swift */; };
@@ -21,13 +24,16 @@
 		E0EC493428BF37CB001361CF /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493328BF37CB001361CF /* ServiceManager.swift */; };
 		E0EC493628BF37DE001361CF /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493528BF37DE001361CF /* Enums.swift */; };
 		E0EC493828BF37FA001361CF /* VisitorMessageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493728BF37FA001361CF /* VisitorMessageDetails.swift */; };
-		E0EC493D28BF4E9F001361CF /* DetailOfChatVisitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493C28BF4E9F001361CF /* DetailOfChatVisitorViewController.swift */; };
+		E0EC493D28BF4E9F001361CF /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493C28BF4E9F001361CF /* ChatController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5149A77140CA63688DBF6827 /* Pods-YapChatProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.debug.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.debug.xcconfig"; sourceTree = "<group>"; };
 		5A5843EF0FDD19355C6CA88E /* Pods-YapChatProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.release.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.release.xcconfig"; sourceTree = "<group>"; };
 		5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapChatProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0AD305A28C142EB0046CA89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRViewController.swift; sourceTree = "<group>"; };
+		E0D6181628C88702001536E7 /* SwiftRExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRExample.swift; sourceTree = "<group>"; };
 		E0EC491328BF361D001361CF /* YapChatProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YapChatProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0EC491628BF361D001361CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0EC491828BF361D001361CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,7 +49,7 @@
 		E0EC493328BF37CB001361CF /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		E0EC493528BF37DE001361CF /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		E0EC493728BF37FA001361CF /* VisitorMessageDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorMessageDetails.swift; sourceTree = "<group>"; };
-		E0EC493C28BF4E9F001361CF /* DetailOfChatVisitorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOfChatVisitorViewController.swift; sourceTree = "<group>"; };
+		E0EC493C28BF4E9F001361CF /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,14 @@
 				5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E0AD305928C142B80046CA89 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				E0AD305A28C142EB0046CA89 /* Chat.swift */,
+			);
+			path = Class;
 			sourceTree = "<group>";
 		};
 		E0EC490A28BF361D001361CF = {
@@ -87,6 +101,7 @@
 		E0EC491528BF361D001361CF /* YapChatProject */ = {
 			isa = PBXGroup;
 			children = (
+				E0AD305928C142B80046CA89 /* Class */,
 				E0EC493B28BF39CA001361CF /* View controllers */,
 				E0EC493A28BF39BA001361CF /* Model */,
 				E0EC493928BF39AC001361CF /* Utilities */,
@@ -125,7 +140,9 @@
 			children = (
 				E0EC491A28BF361D001361CF /* ViewController.swift */,
 				E0EC492D28BF3651001361CF /* SendMessage.swift */,
-				E0EC493C28BF4E9F001361CF /* DetailOfChatVisitorViewController.swift */,
+				E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */,
+				E0EC493C28BF4E9F001361CF /* ChatController.swift */,
+				E0D6181628C88702001536E7 /* SwiftRExample.swift */,
 			);
 			path = "View controllers";
 			sourceTree = "<group>";
@@ -254,15 +271,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0EC493D28BF4E9F001361CF /* DetailOfChatVisitorViewController.swift in Sources */,
+				E0EC493D28BF4E9F001361CF /* ChatController.swift in Sources */,
+				E0AD305B28C142EB0046CA89 /* Chat.swift in Sources */,
 				E0EC492128BF361D001361CF /* YapChatProject.xcdatamodeld in Sources */,
 				E0EC492E28BF3651001361CF /* SendMessage.swift in Sources */,
 				E0EC493028BF3786001361CF /* User.swift in Sources */,
+				E0AD305D28C1DB2E0046CA89 /* SwiftRViewController.swift in Sources */,
 				E0EC493428BF37CB001361CF /* ServiceManager.swift in Sources */,
 				E0EC491B28BF361D001361CF /* ViewController.swift in Sources */,
 				E0EC493828BF37FA001361CF /* VisitorMessageDetails.swift in Sources */,
 				E0EC491728BF361D001361CF /* AppDelegate.swift in Sources */,
 				E0EC493228BF37AD001361CF /* UserMessage.swift in Sources */,
+				E0D6181728C88702001536E7 /* SwiftRExample.swift in Sources */,
 				E0EC493628BF37DE001361CF /* Enums.swift in Sources */,
 				E0EC491928BF361D001361CF /* SceneDelegate.swift in Sources */,
 			);

@@ -15,3 +15,17 @@ enum ApiKey {
     static let uploadFiles = "/api/WebChat/UploadFiles"
     
 }
+
+enum MethodName {
+    static let visitorTypingAlert = "visitorTypingAlert"
+    static let agentTypingAlert = "agentTypingAlert"
+    static let alert = "alert"
+    static let broadcastMessage = "broadcastMessage"
+    static let ImageFromAgent = "ImageFromAgent"
+}
+
+enum Types {
+    static let method = "M"
+    static let array = "A"
+    static let hubName = "H"
+}
