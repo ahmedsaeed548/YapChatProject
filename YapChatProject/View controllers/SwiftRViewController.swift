@@ -23,7 +23,10 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
     var userMessage: UserMessage?
     var detailOfVisitor: VisitorMessageDetails?
     var message: String = ""
-    let url = "https://tlp.360scrm.com"
+    let baseURL = "https://tlp.360scrm.com"
+    
+    let userId = UserDefaults.standard.integer(forKey: "visitorId")
+    let sessionId = UserDefaults.standard.integer(forKey: "sessionId")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,21 +41,16 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
         
         receiveMessage()
         
-        saveVisitor(name: "ios", email: "iostest@gmail.com", phoneNumber: "03344978228")
-        
-       let userId = UserDefaults.standard.integer(forKey: "visitorId")
-        let sessionId = UserDefaults.standard.integer(forKey: "sessionId")
-        
         print("\(userId), \(sessionId)")
         
-//        if userId == self.user?.id &&  {
-//            self.detailsOfVisitorChat(visitorId: self.user?.id ?? 0, sessionId: self.user?.visitorSession.id ?? 1)
+        self.saveVisitor(name: "ios", email: "iostest@gmail.com", phoneNumber: "03344978228")
+//        if userId != nil && sessionId != nil {
+//            self.detailsOfVisitorChat(visitorId: self.userId, sessionId: self.sessionId)
 //        } else {
-//            saveVisitor(name: "ios", email: "iostest@gmail.com", phoneNumber: "03344978228")
+//            self.saveVisitor(name: "ios", email: "iostest@gmail.com", phoneNumber: "03344978228")
 //        }
-        
+
         sendBtn.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-        
     }
     
     func openHubConnection() {
@@ -91,8 +89,7 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
     @objc func sendMessage() {
         
         self.message = messageTxtField.text!
-        print("UserId \(self.user?.id), VisitorSessionID: \(self.user?.visitorSession.id), message \(message)")
-        self.saveVisitorChat(visitorSessionID: user?.visitorSession.id ?? 0, visitorId: user?.id ?? 1, message: message)
+        self.saveVisitorChat(visitorSessionID: self.user?.visitorSession.id ?? 1, visitorId: self.user?.id ?? 0, message: message)
         if let text = self.chatTextView.text {
             self.chatTextView.text = "\(text)\n\n\(self.user!.name): \(self.message)"}
     }
@@ -111,9 +108,6 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
                         if let text = self.chatTextView.text {
                             self.chatTextView.text = "\(text)\n\n\(array![0]): \(array![2])"}
                     }
-                   
-//                    if let text = self.chatTextView.text {
-//                        self.chatTextView.text = "\(text)\n\n\(array![0]): \(array![2])"}
                 }
                 
                 if values[Types.method] as! String == MethodName.agentTypingAlert {
@@ -124,8 +118,9 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 if values[Types.method] as! String == MethodName.ImageFromAgent {
-                    let image = values[Types.array] as? [Any]
-                    print("Image URL \(image![2])")
+                    let imageArr = values[Types.array] as? [Any]
+                    let imageURL = self.baseURL + imageArr?[2] as! String
+                    print("\(self.baseURL)\(imageArr![2])")
                 }
             }
         }

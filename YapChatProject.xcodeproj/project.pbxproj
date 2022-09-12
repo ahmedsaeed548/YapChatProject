@@ -10,7 +10,6 @@
 		4C11700275A750D372D53811 /* Pods_YapChatProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */; };
 		E0AD305B28C142EB0046CA89 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305A28C142EB0046CA89 /* Chat.swift */; };
 		E0AD305D28C1DB2E0046CA89 /* SwiftRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */; };
-		E0D6181728C88702001536E7 /* SwiftRExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D6181628C88702001536E7 /* SwiftRExample.swift */; };
 		E0EC491728BF361D001361CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491628BF361D001361CF /* AppDelegate.swift */; };
 		E0EC491928BF361D001361CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491828BF361D001361CF /* SceneDelegate.swift */; };
 		E0EC491B28BF361D001361CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491A28BF361D001361CF /* ViewController.swift */; };
@@ -33,7 +32,6 @@
 		5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapChatProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0AD305A28C142EB0046CA89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRViewController.swift; sourceTree = "<group>"; };
-		E0D6181628C88702001536E7 /* SwiftRExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRExample.swift; sourceTree = "<group>"; };
 		E0EC491328BF361D001361CF /* YapChatProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YapChatProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0EC491628BF361D001361CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0EC491828BF361D001361CF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 				E0EC492D28BF3651001361CF /* SendMessage.swift */,
 				E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */,
 				E0EC493C28BF4E9F001361CF /* ChatController.swift */,
-				E0D6181628C88702001536E7 /* SwiftRExample.swift */,
 			);
 			path = "View controllers";
 			sourceTree = "<group>";
@@ -282,7 +279,6 @@
 				E0EC493828BF37FA001361CF /* VisitorMessageDetails.swift in Sources */,
 				E0EC491728BF361D001361CF /* AppDelegate.swift in Sources */,
 				E0EC493228BF37AD001361CF /* UserMessage.swift in Sources */,
-				E0D6181728C88702001536E7 /* SwiftRExample.swift in Sources */,
 				E0EC493628BF37DE001361CF /* Enums.swift in Sources */,
 				E0EC491928BF361D001361CF /* SceneDelegate.swift in Sources */,
 			);

@@ -10,7 +10,7 @@ import Foundation
 struct VisitorMessageDetails: Codable {
     let visitorID, visitorSession: Int
     let visitorSessionName: String
-    let webChatDetialVisitor: [WebChatDetialVisitor]
+    let webChatDetialVisitor: [WebChatDetialVisitor]?
 
     enum CodingKeys: String, CodingKey {
         case visitorID = "VisitorId"

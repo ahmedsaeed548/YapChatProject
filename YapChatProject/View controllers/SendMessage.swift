@@ -135,7 +135,6 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
                 print("invoked Successfully!")
             }
         }
-        
     }
     
     @objc func receiveMessage() {
