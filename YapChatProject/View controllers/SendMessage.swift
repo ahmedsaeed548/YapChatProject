@@ -123,9 +123,11 @@ class SendMessageViewController: UIViewController, UITextFieldDelegate {
     @objc func sendMessage() {
         self.messageTxt = messageTxtField.text!
         
-        print("User Id is \(self.user?.id ?? 0) and name is \(user?.name ?? " ")")
-        self.saveVisitorChat(visitorSessionID: user?.visitorSession.id ?? 0, visitorId: user?.id ?? 1, message: messageTxt)
+        print("User Id is \(self.user?.id ?? 0) and ID is \(user?.visitorSession.id)")
+        self.saveVisitorChat(visitorSessionID: self.user?.visitorSession.id ?? 0, visitorId: self.user?.id ?? 1, message: messageTxt)
+        
         self.detailsOfVisitorChat(visitorId: self.user?.id ?? 0, sessionId: self.user?.visitorSession.id ?? 1)
+        
         message.append(messageTxt)
         
         chat.invoke(method: "visitorReply", withArgs: [self.user!.name, self.user!.id, messageTxt]) { result, error in

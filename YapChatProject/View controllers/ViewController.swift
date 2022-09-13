@@ -37,6 +37,7 @@ class ViewController: UIViewController {
                 switch result {
                 case .success(let response):
                     print("response is \(response)")
+
                     self.navigateToSendMessage()
                     self.user = response.model
                 case .failure(let failure):

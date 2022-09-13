@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 class ServiceManager {
     
@@ -45,8 +45,42 @@ class ServiceManager {
     }
     dataTask.resume()
 }
-    
-    
+//    func createMultipart(image: UIImage, callback: (Bool) -> Void){
+//        // use SwiftyJSON to convert a dictionary to JSON
+//        var parameterJSON = JSON([
+//            "id_user": "test"
+//        ])
+//        // JSON stringify
+//        let parameterString = parameterJSON.rawString(encoding: NSUTF8StringEncoding, options: nil)
+//        let jsonParameterData = parameterString!.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
+//        // convert image to binary
+//        let imageData = image.jpegData(compressionQuality: 0.7)
+//        // upload is part of AlamoFire
+//        upload(
+//            .POST,
+//            URLString: "http://httpbin.org/post",
+//            multipartFormData: { multipartFormData in
+//                // fileData: puts it in "files"
+//                multipartFormData.appendBodyPart(fileData: jsonParameterData!, name: "goesIntoFile", fileName: "json.txt", mimeType: "application/json")
+//                multipartFormData.appendBodyPart(fileData: imageData, name: "file", fileName: "iosFile.jpg", mimeType: "image/jpg")
+//                // data: puts it in "form"
+//                multipartFormData.appendBodyPart(data: jsonParameterData!, name: "goesIntoForm")
+//            },
+//            encodingCompletion: { encodingResult in
+//                switch encodingResult {
+//                case .Success(let upload, _, _):
+//                    upload.responseJSON { request, response, data, error in
+//                        let json = JSON(data!)
+//                        println("json:: \(json)")
+//                        callback(true)
+//                    }
+//                case .Failure(let encodingError):
+//                    callback(false)
+//                }
+//            }
+//        )
+//    }
+//
   
 }
 

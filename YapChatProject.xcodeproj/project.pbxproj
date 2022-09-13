@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4C11700275A750D372D53811 /* Pods_YapChatProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */; };
+		D4114912286E0C909266538B /* Pods_YapChatProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1A2D233CD1B851FA2662B3 /* Pods_YapChatProject.framework */; };
+		E0AD1CEE28D07BB8001B6F6C /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E0AD1CF128D08D46001B6F6C /* ImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD1CF028D08D46001B6F6C /* ImageUpload.swift */; };
 		E0AD305B28C142EB0046CA89 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305A28C142EB0046CA89 /* Chat.swift */; };
 		E0AD305D28C1DB2E0046CA89 /* SwiftRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */; };
 		E0EC491728BF361D001361CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491628BF361D001361CF /* AppDelegate.swift */; };
@@ -26,10 +28,24 @@
 		E0EC493D28BF4E9F001361CF /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493C28BF4E9F001361CF /* ChatController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E0AD1CEF28D07BB8001B6F6C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				E0AD1CEE28D07BB8001B6F6C /* (null) in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		5149A77140CA63688DBF6827 /* Pods-YapChatProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.debug.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.debug.xcconfig"; sourceTree = "<group>"; };
-		5A5843EF0FDD19355C6CA88E /* Pods-YapChatProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.release.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.release.xcconfig"; sourceTree = "<group>"; };
-		5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapChatProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BC247BA93D63CE703471451 /* Pods-YapChatProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.release.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.release.xcconfig"; sourceTree = "<group>"; };
+		4EF8751179DC039ADC65844E /* Pods-YapChatProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.debug.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.debug.xcconfig"; sourceTree = "<group>"; };
+		E0AD1CF028D08D46001B6F6C /* ImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUpload.swift; sourceTree = "<group>"; };
 		E0AD305A28C142EB0046CA89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRViewController.swift; sourceTree = "<group>"; };
 		E0EC491328BF361D001361CF /* YapChatProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YapChatProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +64,7 @@
 		E0EC493528BF37DE001361CF /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		E0EC493728BF37FA001361CF /* VisitorMessageDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorMessageDetails.swift; sourceTree = "<group>"; };
 		E0EC493C28BF4E9F001361CF /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		EF1A2D233CD1B851FA2662B3 /* Pods_YapChatProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapChatProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,17 +72,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C11700275A750D372D53811 /* Pods_YapChatProject.framework in Frameworks */,
+				D4114912286E0C909266538B /* Pods_YapChatProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DD3875FC7DBADBB292CC7918 /* Frameworks */ = {
+		3023FA5B04926DFF7EBD65CD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5E4342853B6FF5E6BA9C7EEC /* Pods_YapChatProject.framework */,
+				EF1A2D233CD1B851FA2662B3 /* Pods_YapChatProject.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,7 +101,7 @@
 				E0EC491528BF361D001361CF /* YapChatProject */,
 				E0EC491428BF361D001361CF /* Products */,
 				F34BBE40E30C6DBE8387E548 /* Pods */,
-				DD3875FC7DBADBB292CC7918 /* Frameworks */,
+				3023FA5B04926DFF7EBD65CD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +136,7 @@
 			children = (
 				E0EC493328BF37CB001361CF /* ServiceManager.swift */,
 				E0EC493528BF37DE001361CF /* Enums.swift */,
+				E0AD1CF028D08D46001B6F6C /* ImageUpload.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -147,8 +165,8 @@
 		F34BBE40E30C6DBE8387E548 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5149A77140CA63688DBF6827 /* Pods-YapChatProject.debug.xcconfig */,
-				5A5843EF0FDD19355C6CA88E /* Pods-YapChatProject.release.xcconfig */,
+				4EF8751179DC039ADC65844E /* Pods-YapChatProject.debug.xcconfig */,
+				4BC247BA93D63CE703471451 /* Pods-YapChatProject.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -160,11 +178,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E0EC492A28BF3620001361CF /* Build configuration list for PBXNativeTarget "YapChatProject" */;
 			buildPhases = (
-				4E643FE520A7FF8520EA9E9D /* [CP] Check Pods Manifest.lock */,
+				4C800D0A5EDE0D0E2A6DFC7B /* [CP] Check Pods Manifest.lock */,
 				E0EC490F28BF361D001361CF /* Sources */,
 				E0EC491028BF361D001361CF /* Frameworks */,
 				E0EC491128BF361D001361CF /* Resources */,
-				CF56071BFCA70302F932D495 /* [CP] Embed Pods Frameworks */,
+				E0AD1CEF28D07BB8001B6F6C /* Embed Frameworks */,
+				7594071FA5DF2CF94794FCA2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -222,7 +241,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4E643FE520A7FF8520EA9E9D /* [CP] Check Pods Manifest.lock */ = {
+		4C800D0A5EDE0D0E2A6DFC7B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -244,7 +263,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CF56071BFCA70302F932D495 /* [CP] Embed Pods Frameworks */ = {
+		7594071FA5DF2CF94794FCA2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -272,6 +291,7 @@
 				E0AD305B28C142EB0046CA89 /* Chat.swift in Sources */,
 				E0EC492128BF361D001361CF /* YapChatProject.xcdatamodeld in Sources */,
 				E0EC492E28BF3651001361CF /* SendMessage.swift in Sources */,
+				E0AD1CF128D08D46001B6F6C /* ImageUpload.swift in Sources */,
 				E0EC493028BF3786001361CF /* User.swift in Sources */,
 				E0AD305D28C1DB2E0046CA89 /* SwiftRViewController.swift in Sources */,
 				E0EC493428BF37CB001361CF /* ServiceManager.swift in Sources */,
@@ -424,7 +444,7 @@
 		};
 		E0EC492B28BF3620001361CF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5149A77140CA63688DBF6827 /* Pods-YapChatProject.debug.xcconfig */;
+			baseConfigurationReference = 4EF8751179DC039ADC65844E /* Pods-YapChatProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -433,6 +453,8 @@
 				DEVELOPMENT_TEAM = DU9WCKZ2TC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YapChatProject/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow Access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -443,7 +465,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ahmed.YapChatProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahmed.YapChatProjectss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -453,7 +475,7 @@
 		};
 		E0EC492C28BF3620001361CF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A5843EF0FDD19355C6CA88E /* Pods-YapChatProject.release.xcconfig */;
+			baseConfigurationReference = 4BC247BA93D63CE703471451 /* Pods-YapChatProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -462,6 +484,8 @@
 				DEVELOPMENT_TEAM = DU9WCKZ2TC;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = YapChatProject/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Please allow Access";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -472,7 +496,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ahmed.YapChatProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahmed.YapChatProjectss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

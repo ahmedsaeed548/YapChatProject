@@ -2,7 +2,7 @@
 //  Chat.swift
 //  YapChatProject
 //
-//  Created by Ahmad on 02/09/2022.
+//  Created by Ahmad on 13/09/2022.
 //
 
 import Foundation
@@ -16,6 +16,9 @@ public class Chat: NSObject {
     private var user : Model?
     private var userMessage : UserMessage?
     private var detailOfVisitor : VisitorMessageDetails?
+    private var baseURL = "https://tlp.360scrm.com"
+    
+    @IBOutlet weak var typingLBl: UILabel!
     
     public func createConnection() {
         
@@ -81,7 +84,41 @@ public class Chat: NSObject {
             if let error = error {
                 print(error)
             } else {
-                print("\(self.user!.name) is typing..")
+                print("Method invoked.")
+            }
+        }
+    }
+    
+    public func agentTyping(label: UILabel, text: String) {
+        label.text = text
+    }
+    
+   public func receiveMessage() {
+        hubConnection.received = { data in
+            
+            if let values = data as? [String: Any] {
+                print("Method Name is: \(values[Types.method]!), Hubname: \(values[Types.hubName]!), messageReceived: \(values[Types.array]!)")
+                
+                if values[Types.method] as! String == MethodName.broadcastMessage {
+                    
+                    let array = values[Types.array] as? [Any]
+                    if array?[1] as? Int == self.user?.id {
+                        print("Message received \(array![2])")
+                    }
+                }
+                
+                if values[Types.method] as! String == MethodName.agentTypingAlert {
+                    self.agentTyping(label: self.typingLBl, text: "Agent is typing..")
+                } else {
+                    self.agentTyping(label: self.typingLBl, text: " ")
+                    print(".")
+                }
+                
+                if values[Types.method] as! String == MethodName.ImageFromAgent {
+                    let imageArr = values[Types.array] as? [Any]
+                    let imageUrl = self.baseURL + (imageArr?[2] as! String)
+                    print("imageUrl \(imageUrl)")
+                }
             }
         }
     }
