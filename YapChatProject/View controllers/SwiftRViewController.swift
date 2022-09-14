@@ -8,9 +8,14 @@
 import UIKit
 import SignalRSwift
 import SDWebImage
+import AVFoundation
+import MobileCoreServices
+import UniformTypeIdentifiers
 
-class SwiftRViewController: UIViewController, UITextFieldDelegate {
+class SwiftRViewController: UIViewController, UITextFieldDelegate{
     
+    @IBOutlet weak var playBtn: UIButton!
+    @IBOutlet weak var recordBtn: UIButton!
     @IBOutlet weak var cameraBtn: UIButton!
     @IBOutlet weak var typingLBl: UILabel!
     @IBOutlet weak var chatTextView: UITextView!
@@ -25,11 +30,13 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
     var detailOfVisitor: VisitorMessageDetails?
     var message: String = ""
     let baseURL = "https://tlp.360scrm.com"
+    var soundRecorder : AVAudioRecorder!
+    var soundPlayer: AVAudioPlayer!
     
     let userId = UserDefaults.standard.integer(forKey: "visitorId")
     let sessionId = UserDefaults.standard.integer(forKey: "sessionId")
     var imageUrl: String = ""
-    var arrowImage = UIImage(named: "image.jpg")
+    let fileName = "abc.wav"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +63,11 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
         }
         print("\(userId), \(sessionId)")
         
+        setupRecorder()
+        playBtn.isEnabled = false
+        
+        recordBtn.addTarget(self, action: #selector(recordAct), for: .touchUpInside)
+        playBtn.addTarget(self, action: #selector(playerAct), for: .touchUpInside)
         sendBtn.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
         cameraBtn.addTarget(self, action: #selector(sendImage), for: .touchUpInside)
     }
@@ -96,6 +108,79 @@ class SwiftRViewController: UIViewController, UITextFieldDelegate {
         }
         
         hubConnection.start()
+    }
+    
+    func getDocumentDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func setupRecorder() {
+        let audioFilename = getDocumentDirectory().appendingPathComponent(fileName)
+        let recordingSettings = [
+            AVFormatIDKey : Int(kAudioFormatLinearPCM),
+            AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
+            AVEncoderBitRateKey : 320000,
+            AVNumberOfChannelsKey : 2,
+            AVSampleRateKey : 44100.2
+        ] as [String : Any]
+        
+        do {
+            soundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordingSettings)
+            soundRecorder.delegate = self
+        }
+        catch {
+            print(error)
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playAndRecord)
+        } catch {
+            assertionFailure("Failed to configure `AVAAudioSession`: \(error.localizedDescription)")
+        }
+    }
+    
+    func setupPlayer() {
+        let audioFileName = getDocumentDirectory().appendingPathComponent(fileName)
+        print("Audio file name \(audioFileName)")
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOf: audioFileName)
+            soundPlayer.delegate = self
+            soundPlayer.prepareToPlay()
+            soundPlayer.volume = 1.0
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+    @objc func recordAct() {
+        if recordBtn.titleLabel?.text == "Record" {
+            soundRecorder.record()
+            recordBtn.setTitle("Stop", for: .normal)
+            playBtn.isEnabled = false
+        }
+        else {
+            soundRecorder.stop()
+            recordBtn.setTitle("Record", for: .normal)
+            playBtn.isEnabled = false
+            
+        }
+    }
+    
+    @objc func playerAct() {
+        if playBtn.titleLabel?.text == "Play" {
+            playBtn.setTitle("Stop", for: .normal)
+            recordBtn.isEnabled = false
+            setupPlayer()
+            soundPlayer.play()
+        }
+        else {
+            soundRecorder.stop()
+            playBtn.setTitle("Play", for: .normal)
+            recordBtn.isEnabled = false
+            
+        }
     }
     
     
@@ -249,5 +334,49 @@ extension SwiftRViewController: UIImagePickerControllerDelegate, UINavigationCon
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SwiftRViewController: AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        playBtn.isEnabled = true
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        recordBtn.isEnabled = true
+        playBtn.setTitle("Play", for: .normal)
+    }
+}
+
+extension SwiftRViewController: UIDocumentPickerDelegate {
+    
+    func selectFiles() {
+        let types = UTType.types(tag: "json",
+                                 tagClass: UTTagClass.filenameExtension,
+                                 conformingTo: nil)
+        let documentPickerController = UIDocumentPickerViewController(
+                forOpeningContentTypes: types)
+        documentPickerController.delegate = self
+        self.present(documentPickerController, animated: true, completion: nil)
+    }
+    
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let myURL = urls.first else {
+            return
+        }
+        print("import result : \(myURL)")
+    }
+          
+
+    public func documentMenu(_ documentMenu:UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+
+
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        print("view was cancelled")
+        dismiss(animated: true, completion: nil)
     }
 }

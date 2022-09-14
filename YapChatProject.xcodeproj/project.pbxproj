@@ -46,6 +46,7 @@
 		4BC247BA93D63CE703471451 /* Pods-YapChatProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.release.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.release.xcconfig"; sourceTree = "<group>"; };
 		4EF8751179DC039ADC65844E /* Pods-YapChatProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.debug.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.debug.xcconfig"; sourceTree = "<group>"; };
 		E0AD1CF028D08D46001B6F6C /* ImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUpload.swift; sourceTree = "<group>"; };
+		E0AD1CF228D1E8E2001B6F6C /* YapChatProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YapChatProject.entitlements; sourceTree = "<group>"; };
 		E0AD305A28C142EB0046CA89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRViewController.swift; sourceTree = "<group>"; };
 		E0EC491328BF361D001361CF /* YapChatProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YapChatProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +117,7 @@
 		E0EC491528BF361D001361CF /* YapChatProject */ = {
 			isa = PBXGroup;
 			children = (
+				E0AD1CF228D1E8E2001B6F6C /* YapChatProject.entitlements */,
 				E0AD305928C142B80046CA89 /* Class */,
 				E0EC493B28BF39CA001361CF /* View controllers */,
 				E0EC493A28BF39BA001361CF /* Model */,
@@ -448,6 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = YapChatProject/YapChatProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DU9WCKZ2TC;
@@ -479,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = YapChatProject/YapChatProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DU9WCKZ2TC;
