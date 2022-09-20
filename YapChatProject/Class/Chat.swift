@@ -9,14 +9,27 @@ import Foundation
 import UIKit
 import SignalRSwift
 
-public class Chat: NSObject {
+protocol CallBack: AnyObject {
+    func onReceiveMessage(message: String)
+    func onImageReceive(imageUrl: String)
+}
+
+extension CallBack {
+    
+}
+
+public class Chat: CallBack {
     
     private var hubConnection : HubConnection!
     private var chatHub : HubProxy!
-    private var user : Model?
+    var user : Model?
     private var userMessage : UserMessage?
-    private var detailOfVisitor : VisitorMessageDetails?
+    var detailOfVisitor : VisitorMessageDetails?
     private var baseURL = "https://tlp.360scrm.com"
+    private var userId = UserDefaults.standard.integer(forKey: "visitorId")
+    private var sessionId = UserDefaults.standard.integer(forKey: "sessionId")
+    var messages: [String] = [String]()
+    var imageUrlPath: String?
     
     @IBOutlet weak var typingLBl: UILabel!
     
@@ -39,11 +52,30 @@ public class Chat: NSObject {
         hubConnection.start()
     }
     
-    public func closeConnection(reason: String) {
-        hubConnection.closed = { print("\(reason)") }
+    public func openConnection(name: String, email: String, phoneNumber: String) {
+        
+        if self.userId != 0 && self.sessionId != 0 {
+            self.detailsOfVisitorChat(visitorId: self.userId, sessionId: self.sessionId)
+            print("If statement")
+        } else {
+            self.saveVisitor(name: name, email: email, phoneNumber: phoneNumber)
+            print("Else statement")
+        }
     }
     
-    public func openConnection(name: String, email: String, phoneNumber: String) {
+   public func printUserDefaultValues() {
+        print("\(self.userId), \(self.sessionId)")
+    }
+    
+    func onReceiveMessage(message: String) {
+        print("Message received \(message)")
+    }
+    
+    func onImageReceive(imageUrl: String) {
+        print("image URL is: \(imageUrl)")
+    }
+    
+    public func saveVisitor(name: String, email: String, phoneNumber: String) {
             
             let parameters: [String : Any ] = [
                 "name": name,
@@ -55,6 +87,10 @@ public class Chat: NSObject {
                 case .success(let response):
                     print("response is \(response)")
                     self.user = response.model
+                    self.userId = response.model.id
+                    self.sessionId = response.model.visitorSession.id ?? 0
+                    UserDefaults.standard.set(self.user?.id, forKey: "visitorId")
+                    UserDefaults.standard.set(self.user?.visitorSession.id, forKey: "sessionId")
                 case .failure(let failure):
                     print(failure)
                 }
@@ -64,15 +100,34 @@ public class Chat: NSObject {
     public func sendMessage(message: String) {
         
         let parameters: [String : Any ] = [
-            "WcVisitorSessionId": self.user?.visitorSession.id ?? 0,
-            "wcVisitorId": self.user?.id ?? 1,
+            "WcVisitorSessionId": self.sessionId,
+            "wcVisitorId": self.userId,
             "message": message,
         ]
+        
         ServiceManager.postApiCall(parameters: parameters, apiKey: ApiKey.saveVisitorChat) {(result : Result<UserMessage,Error>) in
             switch result {
             case .success(let response):
                 print(response)
                 self.userMessage = response
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+        self.printUserDefaultValues()
+    }
+    
+    public func detailsOfVisitorChat(visitorId: Int, sessionId: Int) {
+        
+        let parameters: [String : Any ] = [
+            "VisitorId": visitorId,
+            "SessionId": sessionId,
+        ]
+        ServiceManager.postApiCall(parameters: parameters, apiKey: ApiKey.getDetailsOfVisitorChatSession) {(result : Result<VisitorMessageDetails,Error>) in
+            switch result {
+            case .success(let response):
+                print(response)
+                self.detailOfVisitor = response
             case .failure(let failure):
                 print(failure)
             }
@@ -97,29 +152,43 @@ public class Chat: NSObject {
         hubConnection.received = { data in
             
             if let values = data as? [String: Any] {
-                print("Method Name is: \(values[Types.method]!), Hubname: \(values[Types.hubName]!), messageReceived: \(values[Types.array]!)")
+                print("Method Name is: \(values[Types.method]!), Hubname: \(values[Types.hubName]!), Array: \(values[Types.array]!)")
                 
                 if values[Types.method] as! String == MethodName.broadcastMessage {
                     
                     let array = values[Types.array] as? [Any]
-                    if array?[1] as? Int == self.user?.id {
-                        print("Message received \(array![2])")
+                    if array?[1] as? Int == self.userId {
+                        let message = array?[2] as! String
+                        self.onReceiveMessage(message: message)
                     }
-                }
-                
-                if values[Types.method] as! String == MethodName.agentTypingAlert {
-                    self.agentTyping(label: self.typingLBl, text: "Agent is typing..")
-                } else {
-                    self.agentTyping(label: self.typingLBl, text: " ")
-                    print(".")
                 }
                 
                 if values[Types.method] as! String == MethodName.ImageFromAgent {
                     let imageArr = values[Types.array] as? [Any]
                     let imageUrl = self.baseURL + (imageArr?[2] as! String)
-                    print("imageUrl \(imageUrl)")
+                    self.onImageReceive(imageUrl: imageUrl)
+                    print("imageUrl \(imageUrl)\n/n Image URL: \(self.imageUrlPath ?? "No image url found")")
+                }
+                
+                if values[Types.method] as! String == MethodName.completedAlert {
+                    let array = values[Types.array] as? [Any]
+                    if array?[1] as? Int == self.userId {
+                        print("The chat has been closed by the Admin")
+                        UserDefaults.standard.removeObject(forKey: "visitorId")
+                        UserDefaults.standard.removeObject(forKey: "sessionId")
+                    }
                 }
             }
         }
+    }
+    
+    public func audioUpload(path: URL, fileName: String) {
+        let uploadPath = "https://tlp.360scrm.com/api/WebChat/UploadFiles?sessionId=\(self.sessionId)&visitorId=\(self.userId)"
+        DocumentUpload.audioUpload(path: path, url: uploadPath, fileName: fileName)
+    }
+    
+    public func imageUpload(image: UIImage) {
+        let uploadPath = "https://tlp.360scrm.com/api/WebChat/UploadFiles?sessionId=\(self.sessionId)&visitorId=\(self.userId)"
+        DocumentUpload.ImageUpload(image, url: uploadPath)
     }
 }

@@ -22,6 +22,7 @@ enum MethodName {
     static let alert = "alert"
     static let broadcastMessage = "broadcastMessage"
     static let ImageFromAgent = "ImageFromAgent"
+    static let completedAlert = "completedAlert"
 }
 
 enum Types {

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D4114912286E0C909266538B /* Pods_YapChatProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF1A2D233CD1B851FA2662B3 /* Pods_YapChatProject.framework */; };
 		E0AD1CEE28D07BB8001B6F6C /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E0AD1CF128D08D46001B6F6C /* ImageUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD1CF028D08D46001B6F6C /* ImageUpload.swift */; };
+		E0AD1CF128D08D46001B6F6C /* DocumentUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD1CF028D08D46001B6F6C /* DocumentUpload.swift */; };
 		E0AD305B28C142EB0046CA89 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305A28C142EB0046CA89 /* Chat.swift */; };
 		E0AD305D28C1DB2E0046CA89 /* SwiftRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */; };
 		E0EC491728BF361D001361CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC491628BF361D001361CF /* AppDelegate.swift */; };
@@ -26,6 +26,7 @@
 		E0EC493628BF37DE001361CF /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493528BF37DE001361CF /* Enums.swift */; };
 		E0EC493828BF37FA001361CF /* VisitorMessageDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493728BF37FA001361CF /* VisitorMessageDetails.swift */; };
 		E0EC493D28BF4E9F001361CF /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC493C28BF4E9F001361CF /* ChatController.swift */; };
+		E0FE150428D79F7F00238E2D /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FE150328D79F7F00238E2D /* HttpResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,7 +46,7 @@
 /* Begin PBXFileReference section */
 		4BC247BA93D63CE703471451 /* Pods-YapChatProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.release.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.release.xcconfig"; sourceTree = "<group>"; };
 		4EF8751179DC039ADC65844E /* Pods-YapChatProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YapChatProject.debug.xcconfig"; path = "Target Support Files/Pods-YapChatProject/Pods-YapChatProject.debug.xcconfig"; sourceTree = "<group>"; };
-		E0AD1CF028D08D46001B6F6C /* ImageUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUpload.swift; sourceTree = "<group>"; };
+		E0AD1CF028D08D46001B6F6C /* DocumentUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentUpload.swift; sourceTree = "<group>"; };
 		E0AD1CF228D1E8E2001B6F6C /* YapChatProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = YapChatProject.entitlements; sourceTree = "<group>"; };
 		E0AD305A28C142EB0046CA89 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E0AD305C28C1DB2E0046CA89 /* SwiftRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +66,7 @@
 		E0EC493528BF37DE001361CF /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		E0EC493728BF37FA001361CF /* VisitorMessageDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorMessageDetails.swift; sourceTree = "<group>"; };
 		E0EC493C28BF4E9F001361CF /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
+		E0FE150328D79F7F00238E2D /* HttpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
 		EF1A2D233CD1B851FA2662B3 /* Pods_YapChatProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YapChatProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -138,7 +140,8 @@
 			children = (
 				E0EC493328BF37CB001361CF /* ServiceManager.swift */,
 				E0EC493528BF37DE001361CF /* Enums.swift */,
-				E0AD1CF028D08D46001B6F6C /* ImageUpload.swift */,
+				E0AD1CF028D08D46001B6F6C /* DocumentUpload.swift */,
+				E0FE150328D79F7F00238E2D /* HttpResponse.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -289,11 +292,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0FE150428D79F7F00238E2D /* HttpResponse.swift in Sources */,
 				E0EC493D28BF4E9F001361CF /* ChatController.swift in Sources */,
 				E0AD305B28C142EB0046CA89 /* Chat.swift in Sources */,
 				E0EC492128BF361D001361CF /* YapChatProject.xcdatamodeld in Sources */,
 				E0EC492E28BF3651001361CF /* SendMessage.swift in Sources */,
-				E0AD1CF128D08D46001B6F6C /* ImageUpload.swift in Sources */,
+				E0AD1CF128D08D46001B6F6C /* DocumentUpload.swift in Sources */,
 				E0EC493028BF3786001361CF /* User.swift in Sources */,
 				E0AD305D28C1DB2E0046CA89 /* SwiftRViewController.swift in Sources */,
 				E0EC493428BF37CB001361CF /* ServiceManager.swift in Sources */,

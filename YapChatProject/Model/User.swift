@@ -18,8 +18,8 @@ struct User: Codable {
 // MARK: - Model
 struct Model: Codable {
     let id: Int
-    let connectionID: Int?
-    let name, email: String
+    let connectionID: String?
+    let name, email: String?
     let registerDate, createdOn, modifiedOn: String?
     let visitorSession: VisitorSession
     let chatDetail: String?
@@ -40,7 +40,10 @@ struct Model: Codable {
 struct VisitorSession: Codable {
     let id: Int?
     let name: String?
-    let createdOn, connectedWithID, wcVisitorID, agentName: [String]?
+    let createdOn: String?
+    let connectedWithID: String?
+    let wcVisitorID: Int?
+    let agentName: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "Id"

@@ -25,35 +25,37 @@ struct WebChatDetialVisitor: Codable {
     let id: Int?
     let wcVisitorID: Int?
     let name: String?
-    let displayName: String?
-    let conversationDetailID: Int?
     let connectionID: String?
-    let email: String?
     let sessionID: Int?
-    let conversationReplyID, visitorConnectionID, chatMessage: String?
     let message, messageDate: String?
-    let isMediaFile: String?
-    let isReply: Bool
-    let url, webChatDetialVisitorExtension, tags: String?
+    let isMediaFile: Bool?
+    let isReply: Bool?
+    let webChatDetialVisitorExtension: String?
+     //  let tags: NSNull
+    //    let displayName: String?
+    //    let conversationDetailID: Int?
+    //    let email: String?
+    //    let conversationReplyID, visitorConnectionID, chatMessage: String?
+       let url: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "Id"
         case wcVisitorID = "WcVisitorId"
         case name = "Name"
-        case displayName = "DisplayName"
-        case conversationDetailID = "ConversationDetailId"
         case connectionID = "ConnectionId"
-        case email = "Email"
         case sessionID = "SessionId"
-        case conversationReplyID = "ConversationReplyId"
-        case visitorConnectionID = "VisitorConnectionId"
-        case chatMessage = "ChatMessage"
         case message = "Message"
         case messageDate = "MessageDate"
         case isMediaFile = "IsMediaFile"
         case isReply = "IsReply"
         case url = "Url"
         case webChatDetialVisitorExtension = "Extension"
-        case tags = "Tags"
+//        case tags = "Tags"
+        //        case conversationReplyID = "ConversationReplyId"
+        //        case visitorConnectionID = "VisitorConnectionId"
+        //        case chatMessage = "ChatMessage"
+        //  case email = "Email"
+        //        case displayName = "DisplayName"
+        //        case conversationDetailID = "ConversationDetailId"
     }
 }

@@ -240,9 +240,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2al-SS-HaT">
-                                <rect key="frame" x="10" y="221" width="394" height="631"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="textColor" systemColor="labelColor"/>
+                                <rect key="frame" x="10" y="255" width="394" height="597"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
+                                <color key="textColor" systemColor="systemTealColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -282,17 +282,27 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Record"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FuH-QW-47h">
+                                <rect key="frame" x="25" y="212" width="150" height="31"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="AQO-sj-zWt"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Upload Document"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mSN-SQ-Y6p"/>
-                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
                             <constraint firstItem="mSN-SQ-Y6p" firstAttribute="trailing" secondItem="2al-SS-HaT" secondAttribute="trailing" constant="10" id="1jE-5S-1Qu"/>
                             <constraint firstItem="JLq-c1-o9v" firstAttribute="top" secondItem="mSN-SQ-Y6p" secondAttribute="top" constant="8" id="28t-6J-V5r"/>
                             <constraint firstItem="0We-66-LQ5" firstAttribute="leading" secondItem="mSN-SQ-Y6p" secondAttribute="leading" constant="25" id="2aa-aj-iCf"/>
                             <constraint firstItem="mSN-SQ-Y6p" firstAttribute="trailing" secondItem="OnR-iD-67a" secondAttribute="trailing" constant="20" id="33L-3V-bV7"/>
                             <constraint firstItem="oeR-0V-Of5" firstAttribute="top" secondItem="0We-66-LQ5" secondAttribute="bottom" constant="18" id="3Pt-1M-89O"/>
-                            <constraint firstItem="2al-SS-HaT" firstAttribute="top" secondItem="oeR-0V-Of5" secondAttribute="bottom" constant="17" id="3lh-io-JDJ"/>
                             <constraint firstItem="OnR-iD-67a" firstAttribute="top" secondItem="LFC-Iy-fWl" secondAttribute="bottom" constant="8" id="5BC-UH-wjh"/>
+                            <constraint firstItem="FuH-QW-47h" firstAttribute="top" secondItem="oeR-0V-Of5" secondAttribute="bottom" constant="8" id="93k-IQ-PIW"/>
                             <constraint firstItem="mSN-SQ-Y6p" firstAttribute="trailing" secondItem="T0V-xg-Xas" secondAttribute="trailing" constant="20" id="Cte-Q3-zw2"/>
                             <constraint firstItem="0We-66-LQ5" firstAttribute="top" secondItem="LFC-Iy-fWl" secondAttribute="bottom" constant="9" id="Exv-fZ-Gnb"/>
                             <constraint firstItem="JLq-c1-o9v" firstAttribute="leading" secondItem="mSN-SQ-Y6p" secondAttribute="leading" constant="10" id="GgL-oH-r2u"/>
@@ -306,12 +316,15 @@
                             <constraint firstItem="T0V-xg-Xas" firstAttribute="top" secondItem="OnR-iD-67a" secondAttribute="bottom" constant="19" id="gpi-wy-FM1"/>
                             <constraint firstItem="mSN-SQ-Y6p" firstAttribute="trailing" secondItem="LFC-Iy-fWl" secondAttribute="trailing" constant="10" id="pBv-9E-U7z"/>
                             <constraint firstItem="LFC-Iy-fWl" firstAttribute="top" secondItem="JLq-c1-o9v" secondAttribute="bottom" constant="8" id="vOO-wP-IDN"/>
+                            <constraint firstItem="FuH-QW-47h" firstAttribute="leading" secondItem="mSN-SQ-Y6p" secondAttribute="leading" constant="25" id="vVo-4h-oop"/>
+                            <constraint firstItem="2al-SS-HaT" firstAttribute="top" secondItem="FuH-QW-47h" secondAttribute="bottom" constant="12" id="xPv-Tl-3Z6"/>
                             <constraint firstItem="LFC-Iy-fWl" firstAttribute="leading" secondItem="mSN-SQ-Y6p" secondAttribute="leading" constant="10" id="zBR-tu-JcV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraBtn" destination="0We-66-LQ5" id="ZZP-su-Swu"/>
                         <outlet property="chatTextView" destination="2al-SS-HaT" id="6EA-6p-Oml"/>
+                        <outlet property="documentBtn" destination="FuH-QW-47h" id="Hvf-Ru-LqY"/>
                         <outlet property="messageTxtField" destination="LFC-Iy-fWl" id="WjV-1j-aiq"/>
                         <outlet property="playBtn" destination="T0V-xg-Xas" id="vM2-fS-oLw"/>
                         <outlet property="recordBtn" destination="oeR-0V-Of5" id="7Wk-Sk-Yha"/>
@@ -407,9 +420,6 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemIndigoColor">
             <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
@@ -421,6 +431,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tertiarySystemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

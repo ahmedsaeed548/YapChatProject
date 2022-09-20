@@ -8,8 +8,9 @@
 import Foundation
 
 struct UserMessage: Codable {
-    let id, wcVisitorID: Int?
-    let fromID: String?
+    let id: Int?
+    let wcVisitorID: Int?
+  //  let fromID: Int?
     let wcVisitorSessionID: Int?
     let fromName: String?
     let toID: Int?
@@ -20,7 +21,7 @@ struct UserMessage: Codable {
     enum CodingKeys: String, CodingKey {
         case id = "Id"
         case wcVisitorID = "WcVisitorId"
-        case fromID = "FromId"
+      //  case fromID = "FromId"
         case wcVisitorSessionID = "WcVisitorSessionId"
         case fromName = "FromName"
         case toID = "ToId"

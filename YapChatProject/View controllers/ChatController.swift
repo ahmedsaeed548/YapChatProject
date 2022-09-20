@@ -13,14 +13,21 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var messageTxtField: UITextField!
     @IBOutlet weak var saveBtn: UIButton!
     var chat = Chat()
-    
+    var image = UIImage(named: "image")
     override func viewDidLoad() {
         super.viewDidLoad()
         messageTxtField.delegate = self
+        
         chat.createConnection()
-        chat.openConnection(name: "ahmedtest", email: "ah@gmail.com", phoneNumber: "0324234234")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+//            self.chat.openConnection()
+        }
+        
+        chat.receiveMessage()
+        
         sendMsgBtn.addTarget(self, action: #selector(saveVisitor), for: .touchUpInside)
-        saveBtn.addTarget(self, action: #selector(disconnectConnection), for: .touchUpInside)
+        saveBtn.addTarget(self, action: #selector(sendImage), for: .touchUpInside)
     }
     
     @objc func saveVisitor() {
@@ -29,8 +36,8 @@ class ChatViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @objc func disconnectConnection() {
-        chat.closeConnection(reason: "Disconnected!")
+    @objc func sendImage() {
+        chat.imageUpload(image: image!)
     }
 }
 
