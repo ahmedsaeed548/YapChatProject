@@ -9,70 +9,63 @@ import Foundation
 import UIKit
 import SignalRSwift
 
-protocol CallBack: AnyObject {
-    func onReceiveMessage(message: String)
-    func onImageReceive(imageUrl: String)
+protocol ChatDelegate: AnyObject {
+    func receiveMessage(message: String)
+    func receiveImage(imagePath: String)
+    func fetchPreviousMessages(messages: [WebChatDetialVisitor])
 }
 
-extension CallBack {
-    
-}
-
-public class Chat: CallBack {
+public class Chat {
     
     private var hubConnection : HubConnection!
     private var chatHub : HubProxy!
     var user : Model?
-    private var userMessage : UserMessage?
+    var userMessage : UserMessage?
     var detailOfVisitor : VisitorMessageDetails?
     private var baseURL = "https://tlp.360scrm.com"
     private var userId = UserDefaults.standard.integer(forKey: "visitorId")
     private var sessionId = UserDefaults.standard.integer(forKey: "sessionId")
     var messages: [String] = [String]()
-    var imageUrlPath: String?
+    var previousMessages: [WebChatDetialVisitor]?
+    var delegate: ChatDelegate?
     
     @IBOutlet weak var typingLBl: UILabel!
     
-    public func createConnection() {
+    public func createConnection(key: String) {
         
-        self.hubConnection = HubConnection(withUrl: "https://tlp.360scrm.com")
-        self.chatHub = self.hubConnection.createHubProxy(hubName: "NotificationHub")
-        
-        hubConnection.started = { print("Connected to the server.") }
-        
-        hubConnection.reconnecting = { print("Reconnecting...") }
-        
-        hubConnection.reconnected = {  print("Reconnected.")   }
-        
-        hubConnection.connectionSlow = { print("Connection slow...") }
-        
-        hubConnection.error = { error in
-            print(error)
+        if key == "123" {
+            self.hubConnection = HubConnection(withUrl: "https://tlp.360scrm.com")
+            self.chatHub = self.hubConnection.createHubProxy(hubName: "NotificationHub")
+            
+            hubConnection.started = { print("Connected to the server.") }
+            
+            hubConnection.reconnecting = { print("Reconnecting...") }
+            
+            hubConnection.reconnected = {  print("Reconnected.")   }
+            
+            hubConnection.connectionSlow = { print("Connection slow...") }
+            
+            hubConnection.error = { error in
+                print(error)
+            }
+            hubConnection.start()
+        } else {
+            print("Please enter correct key")
         }
-        hubConnection.start()
+        
     }
     
     public func openConnection(name: String, email: String, phoneNumber: String) {
         
         if self.userId != 0 && self.sessionId != 0 {
             self.detailsOfVisitorChat(visitorId: self.userId, sessionId: self.sessionId)
-            print("If statement")
         } else {
             self.saveVisitor(name: name, email: email, phoneNumber: phoneNumber)
-            print("Else statement")
         }
     }
     
    public func printUserDefaultValues() {
         print("\(self.userId), \(self.sessionId)")
-    }
-    
-    func onReceiveMessage(message: String) {
-        print("Message received \(message)")
-    }
-    
-    func onImageReceive(imageUrl: String) {
-        print("image URL is: \(imageUrl)")
     }
     
     public func saveVisitor(name: String, email: String, phoneNumber: String) {
@@ -116,6 +109,7 @@ public class Chat: CallBack {
         }
         self.printUserDefaultValues()
     }
+
     
     public func detailsOfVisitorChat(visitorId: Int, sessionId: Int) {
         
@@ -128,6 +122,8 @@ public class Chat: CallBack {
             case .success(let response):
                 print(response)
                 self.detailOfVisitor = response
+                self.previousMessages = response.webChatDetialVisitor ?? []
+                self.delegate?.fetchPreviousMessages(messages: self.previousMessages ?? [])
             case .failure(let failure):
                 print(failure)
             }
@@ -135,7 +131,7 @@ public class Chat: CallBack {
     }
     
     public func visitorTyping() {
-        chatHub.invoke(method: "visitorTyping", withArgs: [self.user?.id ?? 0,  self.user?.name ?? "Ahmed"]) { response, error  in
+        chatHub.invoke(method: "visitorTyping", withArgs: [self.userMessage?.wcVisitorID ?? 0,  self.userMessage?.fromName ?? ""]) { response, error  in
             if let error = error {
                 print(error)
             } else {
@@ -147,8 +143,9 @@ public class Chat: CallBack {
     public func agentTyping(label: UILabel, text: String) {
         label.text = text
     }
+
     
-   public func receiveMessage() {
+   public func receiveData() {
         hubConnection.received = { data in
             
             if let values = data as? [String: Any] {
@@ -159,30 +156,31 @@ public class Chat: CallBack {
                     let array = values[Types.array] as? [Any]
                     if array?[1] as? Int == self.userId {
                         let message = array?[2] as! String
-                        self.onReceiveMessage(message: message)
+                        print("Message received in hubconnection: \(message)")
+                        self.delegate?.receiveMessage(message: message)
                     }
                 }
                 
                 if values[Types.method] as! String == MethodName.ImageFromAgent {
                     let imageArr = values[Types.array] as? [Any]
                     let imageUrl = self.baseURL + (imageArr?[2] as! String)
-                    self.onImageReceive(imageUrl: imageUrl)
-                    print("imageUrl \(imageUrl)\n/n Image URL: \(self.imageUrlPath ?? "No image url found")")
+                    self.delegate?.receiveImage(imagePath: imageUrl)
                 }
                 
                 if values[Types.method] as! String == MethodName.completedAlert {
                     let array = values[Types.array] as? [Any]
-                    if array?[1] as? Int == self.userId {
+                    if array?[1] as? Int == self.userId && array?[2] as? Int == self.sessionId{
                         print("The chat has been closed by the Admin")
                         UserDefaults.standard.removeObject(forKey: "visitorId")
                         UserDefaults.standard.removeObject(forKey: "sessionId")
+                        print(self.userId, self.sessionId)
                     }
                 }
             }
         }
     }
     
-    public func audioUpload(path: URL, fileName: String) {
+     func audioUpload(path: URL, fileName: String) {
         let uploadPath = "https://tlp.360scrm.com/api/WebChat/UploadFiles?sessionId=\(self.sessionId)&visitorId=\(self.userId)"
         DocumentUpload.audioUpload(path: path, url: uploadPath, fileName: fileName)
     }

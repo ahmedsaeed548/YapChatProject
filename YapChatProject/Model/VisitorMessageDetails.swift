@@ -20,6 +20,7 @@ struct VisitorMessageDetails: Codable {
     }
 }
 
+
 // MARK: - WebChatDetialVisitor
 struct WebChatDetialVisitor: Codable {
     let id: Int?
